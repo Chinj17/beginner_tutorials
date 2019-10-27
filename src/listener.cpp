@@ -1,16 +1,29 @@
+/**
+ * @file listener.cpp
+ * @brief C++ file for the Subscriber node
+ *
+ * This file contains the implementation of tutorials according to the
+ * guidelines given in the assignment taken from ROS Wiki
+ *
+ * @copyright Copyright (c) Fall 2019 ENPM808X
+ *            This project is released under the BSD 3-Clause License.
+ *
+ * @author Chinmay Joshi
+ *
+ * @date 10-27-2019
+ */
+
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
 /**
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
-void chatterCallback(const std_msgs::String::ConstPtr& msg)
-{
+void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -29,10 +42,9 @@ int main(int argc, char **argv)
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-
-  /**
-   * The subscribe() call is how you tell ROS that you want to receive messages
-   * on a given topic.  This invokes a call to the ROS
+ /**
+  * The subscribe() call is how you tell ROS that you want to receive messages
+  * on a given topic.  This invokes a call to the ROS
    * master node, which keeps a registry of who is publishing and who
    * is subscribing.  Messages are passed to a callback function, here
    * called chatterCallback.  subscribe() returns a Subscriber object that you
