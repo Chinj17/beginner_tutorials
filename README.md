@@ -1,4 +1,4 @@
-# beginner_tutorials
+# ROS Publisher/Subscriber
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 # Overview
@@ -7,6 +7,7 @@ This program is an example of a basic publisher/subscriber in ROS. I have create
 # Software
 This program is running on a device running Ubuntu 16.04 and ROS Kinetic.
 * To install ROS kinetic, use this [link](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+* If you don't have catkin installed use this [link](http://wiki.ros.org/catkin)
 
 # Build and Compile
 This code has to run in a catkin workspace. If you don't have a catkin workspace created use the following command to create one:
@@ -24,15 +25,37 @@ cd ..
 catkin_make
 source devel/setup.bash
 ```
+
+# Running the code
+You will need to run these commands separately in 3 different terminals
+* A ROS master has to be Running on one terminal
+```
+cd ~catkin_ws/
+source devel/setup.bash
+roscore
+```
+* Publisher node on the second terminal
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun beginner_tutorials talker
+```
+* Subscriber node on the third terminal
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun beginner_tutorials listener
+```
+
 # Error checks
 
 **cppcheck**
 ```
 cd <path to directory>
-cppcheck --std=c++11 $(find . -name \*.cpp -or -name \*.srv | grep -vE -e "^./build/" -e "^./results/")
+cppcheck --std=c++11 $(find . -name \*.cpp -or -name \*.srv | grep -vE -e "^./build/" -e "^./results/") &> cppcheck.txt
 ```
 **Google C++ standards**
 ```
 cd <path to directory>
-cpplint $(find . -name \*.cpp | grep -vE -e "^./build/" -e "^./results")
+cpplint $(find . -name \*.cpp | grep -vE -e "^./build/" -e "^./results") &> cpplint.txt
 ```
