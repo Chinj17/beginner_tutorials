@@ -13,41 +13,14 @@
  * @date 10-27-2019
  */
 #include <sstream>
-#include <memory>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "beginner_tutorials/changeString.h"
-
-// Creating a smart pointer for the custom string output
-std::unique_ptr<std::string> stringPointer (new std::string);
-
-/**
- * @brief function that enables changing message of publisher
- * @param Param1, request the service to change message
- * @param Param2, response from service to change message
- * @return boolean value to see if message was sent
- */
-bool customString(beginner_tutorials::changeString::Request &req,
-  beginner_tutorials::changeString::Response &res) {
-    res.customString = req.customString;
-    // Resetting the pointer to custom string given by user through service
-    stringPointer.reset(new std::string);
-    *stringPointer = res.customString;
-    ROS_INFO("Request:");
-    ROS_INFO("Sending response:");
-    return true;
-  }
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 
 int main(int argc, char **argv) {
-  std::string custString = "My name is Chinmay Joshi";
-  // Assigning the pointer to default string
-  stringPointer.reset(new std::string);
-  *stringPointer = custString;
-
 /**
  * The ros::init() function needs to see argc and argv so that it can perform
  * any ROS arguments and name remapping that were provided at the command line.
@@ -66,8 +39,6 @@ int main(int argc, char **argv) {
   */
   ros::NodeHandle n;
 
-  ros::ServiceServer srvString = n.advertiseService("customString",
-  customString);
  /**
   * The advertise() function is how you tell ROS that you want to
   * publish on a given topic name. This invokes a call to the ROS
@@ -103,7 +74,7 @@ int main(int argc, char **argv) {
 
   std::stringstream ss;
 
-  ss << *stringPointer << count;
+  ss << "Hi my name is Chinmay Joshi!" << count;
   msg.data = ss.str();
 
   ROS_INFO("%s", msg.data.c_str());
