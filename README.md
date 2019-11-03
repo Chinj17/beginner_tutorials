@@ -27,7 +27,21 @@ source devel/setup.bash
 ```
 
 # Running the code
-You will need to run these commands separately in 3 different terminals
+You can either launch all the files at once or call them individually
+1. Using ROS launch
+* Using default frequency of 10Hz
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch beginner_tutorials subPubNodes.launch
+```
+* Using user defined frequency
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch beginner_tutorials subPubNodes.launch frequency:=15
+```
+2. Running each node individually
 * A ROS master has to be Running on one terminal
 ```
 cd ~catkin_ws/
@@ -46,7 +60,13 @@ cd ~catkin_ws/
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
-
+3. Running ROS service to change the string input
+* In a separate terminal do the following
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosservice call /customString "<user defined string>"
+```
 # Error checks
 
 **cppcheck**
