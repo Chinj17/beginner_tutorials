@@ -8,6 +8,7 @@
     pkg = "beginner_tutorials"
     type = "talker"
     output = "screen"
+    args = "$(arg frequency)"
   />
   <node
     name = "subscriber"
