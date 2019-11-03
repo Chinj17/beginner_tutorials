@@ -28,7 +28,7 @@ source devel/setup.bash
 
 # Running the code
 You can either launch all the files at once or call them individually
-1. Using ROS launch
+### 1. Using ROS launch
 * Using default frequency of 10Hz
 ```
 cd ~/catkin_ws/
@@ -41,7 +41,8 @@ cd ~/catkin_ws/
 source devel/setup.bash
 roslaunch beginner_tutorials subPubNodes.launch frequency:=15
 ```
-2. Running each node individually
+
+### 2. Running each node individually
 * A ROS master has to be Running on one terminal
 ```
 cd ~catkin_ws/
@@ -60,13 +61,23 @@ cd ~catkin_ws/
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
-3. Running ROS service to change the string input
+
+### 3. Running ROS service to change the string input
 * In a separate terminal do the following
 ```
 cd ~catkin_ws/
 source devel/setup.bash
 rosservice call /customString "<user defined string>"
 ```
+
+# RQT Console
+To start the rqt console to see the logger levels you need to have a ROS core running which is mentioned above. After a ROS core is running, in a separate terminal do the follwoing:
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+rqt_console
+```
+
 # Error checks
 
 **cppcheck**
