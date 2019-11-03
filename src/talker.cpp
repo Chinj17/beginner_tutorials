@@ -10,17 +10,47 @@
  *
  * @author Chinmay Joshi
  *
- * @date 10-27-2019
+ * @date 11-3-2019
  */
 #include <sstream>
+#include <memory>
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/changeString.h"
+
+// Creating a smart pointer as per C++11 standards
+std::unique_ptr<std::string> stringPointer (new std::string);
 
 /**
- * This tutorial demonstrates simple sending of messages over the ROS system.
+ * @brief Callback function that enables changing message of publisher
+ * @param Parameter 1, request to service to change message
+ * @param Parameter 2, response to service to change message
+ * @return boolean value, true if message change sent
+ */
+bool customString(beginner_tutorials::changeString::Request &req,
+beginner_tutorials::changeString::Response &res) {
+    res.changeStr = req.changeStr;
+    // Resetting the pointer to custom string given by user through service
+    stringPointer.reset(new std::string);
+    *stringPointer = res.changeStr;
+    ROS_INFO_STREAM("Sending modified response: ");
+    return true;
+  }
+
+/**
+ * @brief This tutorial demonstrates simple sending of messages
+ * over the ROS system.
+ * @param argc is the number of inputs
+ * @param argv is the input
+ * @return integer 0 upon successful execution
  */
 
 int main(int argc, char **argv) {
+  std::string original = "It is time for a change! ";
+  // Assigning the pointer to default string
+  stringPointer.reset(new std::string);
+  *stringPointer = original;
 /**
  * The ros::init() function needs to see argc and argv so that it can perform
  * any ROS arguments and name remapping that were provided at the command line.
@@ -38,6 +68,9 @@ int main(int argc, char **argv) {
   * NodeHandle destructed will close down the node.
   */
   ros::NodeHandle n;
+
+  ros::ServiceServer srvString = n.advertiseService("customString",
+                                                     customString);
 
  /**
   * The advertise() function is how you tell ROS that you want to
@@ -57,8 +90,24 @@ int main(int argc, char **argv) {
   * buffer up before throwing some away.
   */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  // Setting default frequency to 10Hz
+  int frequency = 10;
+  // Checking for more than 1 input
+  if (argc > 1) {
+    // Converting the string to integer
+    frequency = std::stoi(argv[1]);
+    // Giving a warning if frequency is less than 5Hz
+    if (frequency < 5) {
+      ROS_WARN_STREAM("Entered frequency is low, shift to a higher frequency");
+    }
+    // Giving a fatal error if frequency 0 or negative
+    if (frequency <= 0) {
+      ROS_FATAL_STREAM("Frequency cannot be zero or negative");
+    }
+  }
 
-  ros::Rate loop_rate(1);
+  ros::Rate loop_rate(frequency);
+  ROS_INFO_STREAM("Frequency has been set! ");
  /**
   * A count of how many messages we have sent. This is used to create
   * a unique string for each message.
@@ -74,7 +123,11 @@ int main(int argc, char **argv) {
 
   std::stringstream ss;
 
-  ss << "Hi my name is Chinmay Joshi!" << count;
+  if (*stringPointer == "") {
+    ROS_ERROR_STREAM("Empty string");
+  }
+
+  ss << *stringPointer << count;
   msg.data = ss.str();
 
   ROS_INFO("%s", msg.data.c_str());
