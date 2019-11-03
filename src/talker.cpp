@@ -124,6 +124,7 @@ int main(int argc, char **argv) {
   std::stringstream ss;
 
   if (*stringPointer == "") {
+    // Throwing an Error if the string is empty
     ROS_ERROR_STREAM("Empty string");
   }
 
