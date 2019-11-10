@@ -10,7 +10,7 @@
  *
  * @author Chinmay Joshi
  *
- * @date 11-3-2019
+ * @date 11-10-2019
  */
 #include <sstream>
 #include <memory>
@@ -18,6 +18,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeString.h"
+#include "tf/transform_broadcaster.h"
 
 // Creating a smart pointer as per C++11 standards
 std::unique_ptr<std::string> stringPointer (new std::string);
@@ -115,6 +116,10 @@ int main(int argc, char **argv) {
 
   int count = 0;
 
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  tf::Quaternion q;
+
   while (ros::ok()) {
  /**
   * This is a message object. You stuff it with data, and then publish it.
@@ -124,7 +129,6 @@ int main(int argc, char **argv) {
   std::stringstream ss;
 
   if (*stringPointer == "") {
-    // Throwing an Error if the string is empty
     ROS_ERROR_STREAM("Empty string");
   }
 
@@ -139,6 +143,12 @@ int main(int argc, char **argv) {
   * in the constructor above.
   */
   chatter_pub.publish(msg);
+  transform.setOrigin( tf::Vector3(sin(count), cos(count), 1));
+  q.setRPY(3.14, 3.14/2, 0);
+  transform.setRotation(q);
+  br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
+                                                  "world", "talk"));
+
   ros::spinOnce();
   loop_rate.sleep();
   ++count;
