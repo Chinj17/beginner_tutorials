@@ -1,6 +1,6 @@
 /**
  * @file talker.cpp
- * @brief C++ file for the publisher node
+ * @brief main file for the rostests
  *
  * This file contains the implementation of tutorials according to the
  * guidelines given in the assignment taken from ROS Wiki
@@ -10,7 +10,7 @@
  *
  * @author Chinmay Joshi
  *
- * @date 11-3-2019
+ * @date 11-10-2019
  */
 
 #include <gtest/gtest.h>
@@ -20,7 +20,7 @@
 * @brief main function which runs all test results.
 */
 int main(int argc, char** argv) {
-  // Initialize a ROS node
+  // Initialize ROS node
   ros::init(argc, argv, "beginnerTutorialsTest");
 
   // Initialize Google Test
