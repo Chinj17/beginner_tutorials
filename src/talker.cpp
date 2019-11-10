@@ -143,7 +143,7 @@ int main(int argc, char **argv) {
   * in the constructor above.
   */
   chatter_pub.publish(msg);
-  transform.setOrigin( tf::Vector3(sin(count), cos(count), 1));
+  transform.setOrigin(tf::Vector3(sin(count), cos(count), 1));
   q.setRPY(3.14, 3.14/2, 0);
   transform.setRotation(q);
   br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
