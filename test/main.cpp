@@ -1,5 +1,5 @@
 /**
- * @file talker.cpp
+ * @file main.cpp
  * @brief main file for the rostests
  *
  * This file contains the implementation of tutorials according to the
