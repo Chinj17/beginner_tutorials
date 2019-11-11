@@ -17,4 +17,11 @@
     output = "screen"
     launch-prefix = "gnome-terminal --command"
    />
+   <node
+     name = "rosbag"
+     pkg = "rosbag"
+     type = "record"
+     args = "-a -O $(find beginner_tutorials)/results/record.bag"
+     if = "$(eval record == 'enable')"
+   />
 </launch>
