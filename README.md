@@ -100,6 +100,47 @@ source devel/setup.bash
 catkin_make
 rostest beginner_tutorials beginnerTutorialsTest.test
 ```
+
+# Bag Files
+### 1. To inspect the recorded bag file
+```
+cd ~catkin_ws/
+source devel/setup.bash
+cd <path to results directory>
+rosbag info record.bag
+```
+
+### 2. Playing the recorded bag file
+```
+cd ~catkin_ws/
+source devel/setup.bash
+cd <path to results directory>
+rosbag play record.bag
+```
+
+### 3. Playing the bag file with the listener node
+* First terminal run the ROS master
+```
+cd ~catkin_ws/
+source devel/setup.bash
+roscore
+```
+
+* Second terminal run the listener node
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun beginner_tutorials listener
+```
+
+* Third terminal, run the bag file
+```
+cd ~catkin_ws/
+source devel/setup.bash
+cd <path to results directory>
+rosbag play record.bag
+```
+
 # RQT Console
 To start the rqt console to see the logger levels you need to have a ROS core running which is mentioned above. After a ROS core is running, in a separate terminal do the follwoing:
 ```
