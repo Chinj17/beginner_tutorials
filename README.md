@@ -70,6 +70,36 @@ source devel/setup.bash
 rosservice call /customString "<user defined string>"
 ```
 
+### TF Frames
+In order to view TF frames between "/world" and "/talk" run the following steps in new terminals:
+* Viewing the Frames
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun tf tf_echo /world /talk
+```
+* RQT graph
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun rqt_tf_tree rqt_tf_tree
+```
+* Generating PDF
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun tf view_frames
+evince frames.pdf
+```
+
+# Running the tests
+Follow the steps to build the tests:
+```
+cd ~catkin_ws/
+source devel/setup.bash
+catkin_make
+rostest beginner_tutorials beginnerTutorialsTest.test
+```
 # RQT Console
 To start the rqt console to see the logger levels you need to have a ROS core running which is mentioned above. After a ROS core is running, in a separate terminal do the follwoing:
 ```
