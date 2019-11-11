@@ -9,6 +9,10 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg tf)
 ## Declare ROS messages and services
 add_service_files(FILES changeString.srv)
 
+<<<<<<< HEAD
+=======
+## Generate added messages and services with any dependencies listed here
+>>>>>>> 0bd8a1ede15d93ea9b052079926cad3ee356d465
 generate_messages(DEPENDENCIES std_msgs)
 
 ## Declare a catkin package
