@@ -107,7 +107,7 @@ source devel/setup.bash
 rostest beginner_tutorials beginnerTutorialsTest.test
 ```
 
-* To see Gtest style, have a ROS master running in one terminal. To ROS master, please see follow any of the steps above
+* To see Gtest style, have a ROS master running in one terminal. To run ROS master, please follow any of the steps above
 ```
 cd ~catkin_ws/
 source devel/setup.bash
