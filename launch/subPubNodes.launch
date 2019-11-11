@@ -3,6 +3,10 @@
     name = "frequency"
     default = "10"
     />
+  <arg
+    name  ="record"
+    default = "disable"
+  />
   <node
     name = "publisher"
     pkg = "beginner_tutorials"
