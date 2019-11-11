@@ -93,12 +93,25 @@ evince frames.pdf
 ```
 
 # Running the tests
-Follow the steps to build the tests:
+Follow the steps to build and run the tests:
 ```
 cd ~catkin_ws/
 source devel/setup.bash
-catkin_make
+catkin_make run_tests_beginner_tutorials
+```
+
+* Seeing the run of the test only
+```
+cd ~catkin_ws/
+source devel/setup.bash
 rostest beginner_tutorials beginnerTutorialsTest.test
+```
+
+* To see Gtest style, have a ROS master running in one terminal. To ROS master, please see follow any of the steps above
+```
+cd ~catkin_ws/
+source devel/setup.bash
+rosrun beginner_tutorials beginnerTutorialsTest
 ```
 
 # Bag Files
@@ -142,7 +155,7 @@ rosbag play record.bag
 ```
 
 # RQT Console
-To start the rqt console to see the logger levels you need to have a ROS core running which is mentioned above. After a ROS core is running, in a separate terminal do the follwoing:
+To start the rqt console to see the logger levels you need to have a ROS core running which is mentioned above. After a ROS core is running, in a separate terminal do the following:
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
