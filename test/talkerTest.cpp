@@ -1,5 +1,5 @@
 /**
- * @file talker.cpp
+ * @file talkerTest.cpp
  * @brief C++ file for testing nodes
  *
  * This file contains the implementation of rostest according to the
